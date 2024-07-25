@@ -26,14 +26,14 @@ public class UserDaoJDBCImpl implements UserDao {
     }
 
     public void dropUsersTable() {
-        try(Connection conn = Util.getConn();
-        Statement stmt = conn.createStatement()){
+        try (Connection conn = Util.getConn();
+             Statement stmt = conn.createStatement()) {
             stmt.executeUpdate("DROP TABLE IF EXISTS users");
-        }
-        catch (SQLException e) {
+        } catch (SQLException e) {
             e.printStackTrace();
         }
     }
+
     @Override
     public void saveUser(String name, String lastName, byte age) {
         try (Connection conn = Util.getConn();
@@ -50,9 +50,9 @@ public class UserDaoJDBCImpl implements UserDao {
     }
 
     public void removeUserById(long id) {
-        try(Connection conn = Util.getConn();
-        PreparedStatement stmt = conn.prepareStatement("DELETE FROM users WHERE id = ?")){
-            stmt.setLong(1,id);
+        try (Connection conn = Util.getConn();
+             PreparedStatement stmt = conn.prepareStatement("DELETE FROM users WHERE id = ?")) {
+            stmt.setLong(1, id);
             stmt.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -81,8 +81,8 @@ public class UserDaoJDBCImpl implements UserDao {
     }
 
     public void cleanUsersTable() {
-        try(Connection conn = Util.getConn();
-            Statement stmt = conn.createStatement()){
+        try (Connection conn = Util.getConn();
+             Statement stmt = conn.createStatement()) {
             stmt.executeUpdate("TRUNCATE TABLE users");
         } catch (SQLException e) {
             e.printStackTrace();
